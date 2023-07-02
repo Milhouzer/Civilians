@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "People", menuName = "My project/People", order = 0)]
+[CreateAssetMenu(fileName = "People", menuName = "ReputationSystem/People", order = 0)]
 public class People : ScriptableObject {
     [SerializeField]
-    private string PeopleName;
+    private string peopleName;
+    public string PeopleName{
+        get { return peopleName; }
+    }
 }

@@ -6,6 +6,8 @@ using UnityEditor;
 public class ReputationEditor : EditorWindow 
 {
     private ReputationConfig selectedConfig;
+    Editor editor;
+    SerializedObject selectedConfigObject;
 
     private string[] configNames;
     private int selectedIndex;
@@ -33,23 +35,39 @@ public class ReputationEditor : EditorWindow
 
     private void OnGUI() {
         selectedIndex = EditorGUILayout.Popup("Select Config", selectedIndex, configNames);
-        selectedConfig = AssetDatabase.LoadAssetAtPath<ReputationConfig>(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t:ReputationConfig")[selectedIndex]));
-        if (selectedConfig != null)
+        ReputationConfig lastSelectedConfig = AssetDatabase.LoadAssetAtPath<ReputationConfig>(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t:ReputationConfig")[selectedIndex]));
+        if (lastSelectedConfig != selectedConfig)
         {
-            DrawScriptableObjectInspector(selectedConfig);
+            OnSelectedConfigChanged(lastSelectedConfig);
         }
+        
+        if(editor != null)
+            editor.OnInspectorGUI();
 
         // Rest of your GUI code...
     }
 
-    private void DrawScriptableObjectInspector(Object scriptableObject)
+    private void OnSelectedConfigChanged(ReputationConfig newSelectedConfig)
+    {
+        selectedConfig = newSelectedConfig;
+        DrawScriptableObjectInspector(selectedConfig);
+    }
+
+    private void DrawScriptableObjectInspector(Object config)
     {
         EditorGUI.BeginChangeCheck();
-        var serializedObject = new SerializedObject(scriptableObject);
-        serializedObject.Update();
-        Editor editor = Editor.CreateEditor(serializedObject.targetObject);
+
+        selectedConfigObject = new SerializedObject(config);
+        selectedConfigObject.Update();
+
+        editor = Editor.CreateEditor(selectedConfigObject.targetObject);
+        
+        EditorGUILayout.BeginVertical(GUI.skin.box);
         editor.OnInspectorGUI();
-        serializedObject.ApplyModifiedProperties();
+        EditorGUILayout.EndVertical();
+
+        selectedConfigObject.ApplyModifiedProperties();
+        
         EditorGUI.EndChangeCheck();
     }
 }

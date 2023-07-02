@@ -9,39 +9,50 @@ public class ReputationConfigInspector : Editor
     SerializedProperty index;
     SerializedProperty peoples;
     SerializedProperty peopleReputation;
+    SerializedProperty impactScores;
     SerializedProperty reputations;
 
     private string[] peoplesNames;
     private int selectedPeople;
 
+    private int[] relationsValue;
+
     protected virtual void OnEnable()
     {
-        index = serializedObject.FindProperty("index");
         peoples = serializedObject.FindProperty("peoples");
         peopleReputation = serializedObject.FindProperty("peopleReputation");
+        impactScores = serializedObject.FindProperty("impactScores");
 
         peoplesNames = new string[peoples.arraySize];
-        for (int i = 0; i < peoples.arraySize; i++)
-        {
-           SerializedProperty people = peoples.GetArrayElementAtIndex(i);
-           SerializedProperty nameProperty = people.FindPropertyRelative("PeopleName");
-           peoplesNames[i] = nameProperty.stringValue;
-        }
+        relationsValue = new int[peopleReputation.arraySize];
+        
+        UpdatePeopleNames();
     }
 
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
-
-        EditorGUILayout.PropertyField(index);
-
+        EditorGUILayout.PropertyField(impactScores);
         DrawPeoplesList();
-        selectedPeople = EditorGUILayout.Popup("Select People", selectedPeople, peoplesNames);
-        UpdatePeopleReputationSize();
+        UpdatePeopleNames();
+        int newSelectedPeople = EditorGUILayout.Popup("Select People", selectedPeople, peoplesNames);
+        if(newSelectedPeople != selectedPeople)
+        {
+            OnSelectedPeopleChanged(newSelectedPeople);
+        }
         
-        EditorGUILayout.PropertyField(peopleReputation);
-
+        UpdatePeopleReputationSize();
+        if (GUILayout.Button("UpdateSizes"))
+        {
+            UpdateRelationsSize();
+        }
+        DrawSelectedPeopleRelations();
         serializedObject.ApplyModifiedProperties();
+    }
+    
+    private void OnSelectedPeopleChanged(int newValue)
+    {
+        selectedPeople = newValue;
     }
     
     private void DrawPeoplesList()
@@ -69,16 +80,69 @@ public class ReputationConfigInspector : Editor
         {
             SerializedProperty elementProperty = peoples.GetArrayElementAtIndex(i);
             EditorGUILayout.PropertyField(elementProperty);
+
+            SerializedObject assetObject = new SerializedObject(elementProperty.objectReferenceValue);
+            SerializedProperty nameProperty = assetObject.FindProperty("peopleName");
+
+            peoplesNames[i] = nameProperty.stringValue;
         }
 
         EditorGUI.indentLevel--;
     }
 
+    private void DrawSelectedPeopleRelations()
+    {
+        
+        EditorGUI.indentLevel++;
+
+        // EditorGUILayout.PropertyField(peopleReputation);
+        SerializedProperty selectedPeopleRelations = peopleReputation.GetArrayElementAtIndex(selectedPeople);
+        SerializedProperty relations = selectedPeopleRelations.FindPropertyRelative("reputations");
+        if(relations != null)
+        {
+            EditorGUILayout.LabelField(peoplesNames[selectedPeople] + " relations");
+            for (int i = 0; i < relations.arraySize; i++)
+            {
+                SerializedProperty relationValue = relations.GetArrayElementAtIndex(i);
+                if(relationValue != null)
+                    relationValue.intValue = EditorGUILayout.IntSlider("Relation with " + peoplesNames[i], relationValue.intValue, -100, 100);
+            }
+        }
+
+        EditorGUI.indentLevel--;
+    }
+
+    private void UpdatePeopleNames()
+    {
+        // for (int i = 0; i < peoples.arraySize; i++)
+        // {
+        //     SerializedProperty people = peoples.GetArrayElementAtIndex(i);
+        //     if(nameProperty != null )
+        //         peoplesNames[i] = nameProperty.stringValue;
+        //     else
+        //         peoplesNames[i] = i.ToString();
+        // }
+    }
+    
     private void UpdatePeopleReputationSize()
     {
         if (peoples.arraySize != peopleReputation.arraySize)
         {
             peopleReputation.arraySize = peoples.arraySize;
+        }
+    }
+
+    private void UpdateRelationsSize()
+    {
+        for (int i = 0; i < peopleReputation.arraySize; i++)
+        {
+            SerializedProperty reputations = peopleReputation.GetArrayElementAtIndex(i);
+            SerializedProperty relations = reputations.FindPropertyRelative("reputations");
+            if(relations != null && relations.arraySize != peopleReputation.arraySize)
+            {
+                relations.arraySize = peopleReputation.arraySize;
+            }
+            Debug.Log(i + " : " + relations.arraySize);
         }
     }
 }

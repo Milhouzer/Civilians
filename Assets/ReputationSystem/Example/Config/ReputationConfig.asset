@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60586084c6da5db43bb124e9a521f9e4, type: 3}
+  m_Name: ReputationConfig
+  m_EditorClassIdentifier: 
+  peoples:
+  - {fileID: 11400000, guid: 5e28f42440e5b5b49b0478097e07ef3e, type: 2}
+  - {fileID: 11400000, guid: 5d78ca836e4c6094f9f8e461bce7fc6e, type: 2}
+  - {fileID: 11400000, guid: ab13c331ab7d73d42bf024d266f09d35, type: 2}
+  - {fileID: 11400000, guid: 8f52cf150c2d91c46b71b24f7ec6c1c8, type: 2}
+  peopleReputation:
+  - reputations: 64000000e2ffffff3c0000001e000000
+  - reputations: 32000000500000006400000014000000
+  - reputations: 64000000640000006400000064000000
+  - reputations: a6ffffffc4ffffffecffffff64000000
+  impactScores:
+  - impact: 0
+    score: -2
+  - impact: 1
+    score: -1
+  - impact: 2
+    score: 0
+  - impact: 3
+    score: 1
+  - impact: 4
+    score: 2

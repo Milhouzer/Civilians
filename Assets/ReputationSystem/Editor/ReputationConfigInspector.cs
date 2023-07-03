@@ -16,6 +16,8 @@ public class ReputationConfigInspector : Editor
     private int selectedPeople;
 
     private int[] relationsValue;
+    
+    Vector2 scrollPos;
 
     protected virtual void OnEnable()
     {
@@ -32,6 +34,8 @@ public class ReputationConfigInspector : Editor
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
+        scrollPos = GUILayout.BeginScrollView(scrollPos, false, true);
+
         EditorGUILayout.PropertyField(impactScores);
         DrawPeoplesList();
         UpdatePeopleNames();
@@ -47,6 +51,9 @@ public class ReputationConfigInspector : Editor
             UpdateRelationsSize();
         }
         DrawSelectedPeopleRelations();
+
+        GUILayout.EndScrollView ();
+
         serializedObject.ApplyModifiedProperties();
     }
     

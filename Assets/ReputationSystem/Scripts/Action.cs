@@ -10,16 +10,23 @@ public enum ActionImpact {
     VeryMajor
 }
 
+public enum ActionMorality {
+    Right,
+    Wrong
+}
+
 public class Action
 {
     public Individual Instigator;
     public Individual Target;
     public ActionImpact Impact;
+    public ActionMorality AbsoluteMorality;
 
-    public Action(Individual instigator, Individual target, ActionImpact impact)
+    public Action(Individual instigator, Individual target, ActionImpact impact, ActionMorality absoluteMorality)
     {
         this.Instigator = instigator;
         this.Target = target;
         this.Impact = impact;
+        this.AbsoluteMorality = absoluteMorality;
     }
 }

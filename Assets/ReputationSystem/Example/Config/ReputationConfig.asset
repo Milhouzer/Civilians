@@ -24,12 +24,12 @@ MonoBehaviour:
   - reputations: a6ffffffc4ffffffecffffff64000000
   impactScores:
   - impact: 0
-    score: -2
-  - impact: 1
-    score: -1
-  - impact: 2
     score: 0
-  - impact: 3
+  - impact: 1
     score: 1
-  - impact: 4
+  - impact: 2
     score: 2
+  - impact: 3
+    score: 3
+  - impact: 4
+    score: 4

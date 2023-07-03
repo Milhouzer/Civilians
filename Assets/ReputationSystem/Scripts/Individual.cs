@@ -10,9 +10,9 @@ public class Individual : MonoBehaviour
         return people;
     }
 
-    public void CommitAction(Individual target, ActionImpact impact)
+    public void CommitAction(Individual target, ActionImpact impact, ActionMorality absoluteMorality)
     {
-        Action action = new Action(this, target, impact);
+        Action action = new Action(this, target, impact, absoluteMorality);
         CommitAction(action);
     }
 

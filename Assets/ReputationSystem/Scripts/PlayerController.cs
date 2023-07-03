@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
                 Individual hitIndividual = hitObject.GetComponent<Individual>();
                 if(hitIndividual)
                 {
-                    individual.CommitAction(hitIndividual, ActionImpact.Major);
+                    individual.CommitAction(hitIndividual, ActionImpact.VeryMinor, ActionMorality.Wrong);
                 }
             }
         }

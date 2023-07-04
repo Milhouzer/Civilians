@@ -9,7 +9,8 @@ public class ReputationConfigInspector : Editor
     SerializedProperty index;
     SerializedProperty peoples;
     SerializedProperty peopleReputation;
-    SerializedProperty impactScores;
+    SerializedProperty directImpactScores;
+    SerializedProperty indirectImpactScores;
     SerializedProperty reputations;
 
     private string[] peoplesNames;
@@ -23,7 +24,8 @@ public class ReputationConfigInspector : Editor
     {
         peoples = serializedObject.FindProperty("peoples");
         peopleReputation = serializedObject.FindProperty("peopleReputation");
-        impactScores = serializedObject.FindProperty("impactScores");
+        directImpactScores = serializedObject.FindProperty("directImpactScores");
+        indirectImpactScores = serializedObject.FindProperty("indirectImpactScores");
 
         peoplesNames = new string[peoples.arraySize];
         relationsValue = new int[peopleReputation.arraySize];
@@ -36,7 +38,8 @@ public class ReputationConfigInspector : Editor
 
         scrollPos = GUILayout.BeginScrollView(scrollPos, false, true);
 
-        EditorGUILayout.PropertyField(impactScores);
+        EditorGUILayout.PropertyField(directImpactScores);
+        EditorGUILayout.PropertyField(indirectImpactScores);
         DrawPeoplesList();
         UpdatePeopleNames();
         int newSelectedPeople = EditorGUILayout.Popup("Select People", selectedPeople, peoplesNames);

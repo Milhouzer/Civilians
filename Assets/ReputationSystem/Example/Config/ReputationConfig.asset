@@ -22,7 +22,7 @@ MonoBehaviour:
   - reputations: 32000000500000006400000014000000
   - reputations: 64000000640000006400000064000000
   - reputations: a6ffffffc4ffffffecffffff64000000
-  impactScores:
+  directImpactScores:
   - impact: 0
     score: 0
   - impact: 1
@@ -33,3 +33,14 @@ MonoBehaviour:
     score: 3
   - impact: 4
     score: 4
+  indirectImpactScores:
+  - impact: 0
+    score: 1
+  - impact: 1
+    score: 1
+  - impact: 2
+    score: 2
+  - impact: 3
+    score: 2
+  - impact: 4
+    score: 3

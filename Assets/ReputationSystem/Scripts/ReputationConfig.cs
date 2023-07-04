@@ -4,13 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ReputationConfig", menuName = "ReputationSystem/ReputationConfig", order = 0)]
-public class ReputationConfig : ScriptableObject {
+public class ReputationConfig : ScriptableObject 
+{
     [SerializeField]
     People[] peoples;
+
     [SerializeField]
     PeopleReputation[] peopleReputation;
+    
     [SerializeField]
-    ActionImpactScore[] impactScores;
+    ActionImpactScore[] directImpactScores;
+    public ActionImpactScore[] DirectImpactScores
+    {
+        get { return directImpactScores; }
+    }
+    
+    [SerializeField]
+    ActionImpactScore[] indirectImpactScores;
+    public ActionImpactScore[] IndirectImpactScores
+    {
+        get { return indirectImpactScores; }
+    }
 
     public int[,] GetReputations()
     {
@@ -41,36 +55,12 @@ public class ReputationConfig : ScriptableObject {
         peopleReputation[i].Reputations[j] += value;
     }
 
-    public int GetAbsoluteImpactScore(Action action)
-    {
-        Debug.Log(action.Instigator.GetPeople() + " Likes " + action.Target.GetPeople() + " ? : " + DoesLike(action.Instigator.GetPeople(), action.Target.GetPeople()));
-        ActionImpact impact = action.Impact;
-        for (int i = 0; i < impactScores.Length; i++)
-        {
-            ActionImpactScore impactScore = impactScores[i];
-            if(impact == impactScore.impact)
-            {
-                return impactScore.score;
-            }
-        }
-
-        return 0;
-    }
-
     public bool DoesLike(People people, People other)
     {
         int i = GetPeopleId(people);
         int j = GetPeopleId(other);
 
         return GetReputation(i,j) > 0;
-    }
-
-    public int GetRelativeImpactScore(Action action, People observer)
-    {
-        int absoluteImpactScore = GetAbsoluteImpactScore(action);
-        
-
-        return 0;
     }
 
     public int GetPeopleId(People people)

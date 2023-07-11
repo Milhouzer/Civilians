@@ -6,7 +6,6 @@ using CrashKonijn.Goap.Resolver.Interfaces;
 using CrashKonijn.Goap.Resolver.Models;
 using Unity.Collections;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace CrashKonijn.Goap.Classes.Runners
 {
@@ -120,12 +119,7 @@ namespace CrashKonijn.Goap.Classes.Runners
         {
             var conditionObserver = this.goapSet.GoapConfig.ConditionObserver;
             conditionObserver.SetWorldData(localData);
-            
-            // Debug.Log(conditionObserver);
-            // for (int i = 0; i < agent.CurrentGoal.Conditions.Length; i++)
-            // {
-            //     Debug.Log(agent.CurrentGoal.Conditions[i]);
-            // }
+
             return agent.CurrentGoal.Conditions.All(x => conditionObserver.IsMet(x));
         }
 

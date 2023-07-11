@@ -1,5 +1,8 @@
 using UnityEngine;
 
+///
+/// <TODO> : Move to a generic Utility folder </TODO>
+///
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;

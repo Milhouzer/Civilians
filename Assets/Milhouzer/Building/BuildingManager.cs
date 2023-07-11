@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+public static class BuildingManager
+{
+    static List<Building> buildings = new List<Building>();
+    public static List<Building> Buildings { get => buildings; }
+
+    
+    public static void RegisterBuilding(Building building)
+    {
+        buildings.Add(building);
+    }
+
+    public static List<T> GetBuildings<T>()
+    {
+        return buildings.OfType<T>().ToList();
+    }
+}

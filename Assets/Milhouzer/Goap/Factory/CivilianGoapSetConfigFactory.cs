@@ -18,28 +18,22 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
 
         // Goals
         builder.AddWanderGoal();
-        
-        // builder.AddCleanItemsGoal();
-        // builder.AddFixHungerGoal();
+        builder.AddGoToBuildingGoal<Shop>();
+        builder.AddEnterBuildingGoal<Shop>();
 
         // Actions
         builder.AddWanderAction();
-
-        // builder.AddHaulItemAction();
-        // builder.AddPickupItemAction<IEatable>();
-        // builder.AddEatAction();
+        builder.AddGoToBuildingAction<Shop>();
+        builder.AddEnterBuildingAction<Shop>();
         
         // TargetSensors
         builder.AddWanderTargetSensor();
-        // builder.AddTransformTargetSensor();
-        // builder.AddClosestItemTargetSensor<IEatable>();
+        builder.AddClosestBuildingSensor<Shop>();
+        builder.AddClosestBuildingInteriorSensor<Shop>();
         
-        // // WorldSensors
-        // builder.AddIsHoldingSensor<IEatable>();
-        
-        // builder.AddIsInWorldSensor<IEatable>();
-        
-        // builder.AddItemOnFloorSensor();
+        // WorldSensors
+        builder.AddIsInFrontOfBuildingSensor();
+        builder.AddIsInBuildingSensor();
 
         return builder.Build();
     }

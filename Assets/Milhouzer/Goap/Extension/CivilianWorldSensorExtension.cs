@@ -2,15 +2,17 @@ using CrashKonijn.Goap.Classes.Builders;
 
 public static class CivilianWorldSensorExtension
 {
-    public static void AddIsInFrontOfBuildingSensor(this GoapSetBuilder builder)
+    public static void AddIsInFrontOfBuildingSensor<T>(this GoapSetBuilder builder)
+        where T : Building
     {
-        builder.AddWorldSensor<IsInFrontOfBuildingSensor>()
-            .SetKey<IsAtBuildingEntrance>();
+        builder.AddWorldSensor<IsInFrontOfBuildingSensor<T>>()
+            .SetKey<IsAtBuildingEntrance<T>>();
     }
 
-    public static void AddIsInBuildingSensor(this GoapSetBuilder builder)
+    public static void AddIsInBuildingSensor<T>(this GoapSetBuilder builder)
+        where T : Building
     {
-        builder.AddWorldSensor<IsInBuildingSensor>()
-            .SetKey<IsInBuilding>();
+        builder.AddWorldSensor<IsInBuildingSensor<T>>()
+            .SetKey<IsInBuilding<T>>();
     }
 }

@@ -1,6 +1,7 @@
 using CrashKonijn.Goap.Behaviours;
 
-public class IsInBuilding : WorldKeyBase
+public class IsInBuilding<T> : WorldKeyBase
+    where T : Building
 {
     
 }

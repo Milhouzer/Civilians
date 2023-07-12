@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class GoapTester : Singleton<GoapTester>
 {
-    public bool Test;
+    public bool GoToFishShop;
+    public bool GoToFoodShop;
 }

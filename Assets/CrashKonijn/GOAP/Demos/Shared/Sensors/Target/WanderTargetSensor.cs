@@ -8,7 +8,7 @@ namespace Demos.Simple.Sensors.Target
 {
     public class WanderTargetSensor : LocalTargetSensorBase
     {
-        private static readonly Vector2 Bounds = new Vector2(15, 8);
+        private static readonly Vector2 Bounds = new Vector2(30, 30);
 
         public override void Created()
         {

@@ -13,14 +13,14 @@ public class EnterBuildingAction<T> : ActionBase<EnterBuildingAction<T>.Data>
 
         public override void Start(IMonoAgent agent, Data data)
         {
-            data.Timer = Random.Range(0.3f, 1f);
+            
         }
 
         public override ActionRunState Perform(IMonoAgent agent, Data data, ActionContext context)
         {
-            data.Timer += context.DeltaTime;
+            data.RemainingDistance = Vector3.Distance(agent.transform.position, data.Target.Position);
             
-            if (data.Timer > 0)
+            if (data.RemainingDistance > 0.5f)
                 return ActionRunState.Continue;
             
             return ActionRunState.Stop;
@@ -33,8 +33,7 @@ public class EnterBuildingAction<T> : ActionBase<EnterBuildingAction<T>.Data>
         public class Data : IActionData
         {
             public ITarget Target { get; set; }
-            public Building building;
-            public float Timer { get; set; }
+            public float RemainingDistance { get; set; }
         }
 }
 

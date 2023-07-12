@@ -1,6 +1,7 @@
 using CrashKonijn.Goap.Behaviours;
 
-public class EnterBuildingTarget : TargetKeyBase
+public class EnterBuildingTarget<T> : TargetKeyBase
+    where T : Building
 {
 }
 

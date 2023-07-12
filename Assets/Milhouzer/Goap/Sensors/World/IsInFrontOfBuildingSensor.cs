@@ -8,7 +8,8 @@ using CrashKonijn.Goap.Classes;
 using CrashKonijn.Goap.Classes.References;
 
 
-public class IsInFrontOfBuildingSensor : LocalWorldSensorBase
+public class IsInFrontOfBuildingSensor<T> : LocalWorldSensorBase
+    where T : Building
 {
     public override void Created()
     {
@@ -21,10 +22,10 @@ public class IsInFrontOfBuildingSensor : LocalWorldSensorBase
     public override SenseValue Sense(IMonoAgent agent, IComponentReference references)
     {
         var civilian = references.GetCachedComponent<Civilian>();
-        Debug.Log(civilian + " prout");
+        
         if (civilian == null)
             return false;
-        Debug.Log(civilian + " " + civilian.areas.Count);
-        return civilian.areas.Count > 0;
+        
+        return civilian.IsInArea<T>(BuildingEnums.AreaType.Front);
     }
 }

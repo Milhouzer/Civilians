@@ -8,7 +8,8 @@ using CrashKonijn.Goap.Classes;
 using CrashKonijn.Goap.Classes.References;
 
 
-public class IsInBuildingSensor : LocalWorldSensorBase
+public class IsInBuildingSensor<T> : LocalWorldSensorBase
+    where T : Building
 {
     public override void Created()
     {
@@ -25,7 +26,8 @@ public class IsInBuildingSensor : LocalWorldSensorBase
         if (civilian == null)
             return false;
 
-        return civilian.areas.Count > 1;
+        Debug.Log(civilian.IsInArea<T>(BuildingEnums.AreaType.Inside));
+        return civilian.IsInArea<T>(BuildingEnums.AreaType.Inside);
     }
 }
 

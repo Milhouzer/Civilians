@@ -52,9 +52,12 @@ public class CivilianBrain : MonoBehaviour
 
     protected virtual void DetermineGoal()
     {
-        if(GoapTester.Instance.Test)
+        if(GoapTester.Instance.GoToFishShop)
         {
-            this.agent.SetGoal<EnterBuildingGoal<Shop>>(false);
+            this.agent.SetGoal<EnterBuildingGoal<FishShop>>(false);
+        }else if(GoapTester.Instance.GoToFoodShop)
+        {
+            this.agent.SetGoal<EnterBuildingGoal<FoodShop>>(false);
         }else
         {
             this.agent.SetGoal<WanderGoal>(false);

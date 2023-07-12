@@ -23,20 +23,21 @@ public class ClosestBuildingInteriorSensor<T> : LocalTargetSensorBase
 
     public override ITarget Sense(IMonoAgent agent, IComponentReference references)
     {
-        
-        Civilian civilian = references.GetCachedComponent<Civilian>();
-
         this.buildings = BuildingManager.GetBuildings<T>();
         
-        if (civilian == null)
-            return null;
+        Building closest = GetClosestBuilding(this.buildings, agent.transform.position);
 
-        if(civilian.areas.Count == 0)
+        if (closest == null)
             return null;
-
-        Building closest = civilian.areas[0].building;
 
         return new TransformTarget(closest.Doorstep);
+    }
+
+    private T GetClosestBuilding(List<T> buildings, Vector3 position)
+    {
+        return buildings
+            .OrderBy(x => Vector3.Distance(x.transform.position, position))
+            .FirstOrDefault();
     }
 }
 

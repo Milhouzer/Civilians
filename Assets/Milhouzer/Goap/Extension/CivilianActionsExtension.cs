@@ -9,7 +9,8 @@ public static class CivilianActionsExtension
         builder.AddAction<GoToBuildingAction<T>>()
             .SetTarget<GoToBuildingTarget<T>>()
             .AddEffect<IsAtBuildingEntrance<T>>(true);
-    }  
+    }
+    
     public static void AddEnterBuildingAction<T>(this GoapSetBuilder builder)
         where T : Building
     {
@@ -18,5 +19,14 @@ public static class CivilianActionsExtension
             .AddCondition<IsAtBuildingEntrance<T>>(Comparison.GreaterThanOrEqual, 1)
             .AddEffect<IsInBuilding<T>>(true)
             .AddEffect<IsAtBuildingEntrance<T>>(false);
-    }    
+    }
+    
+    public static void AddCraftItemAction(this GoapSetBuilder builder)
+    {
+        // builder.AddAction<CraftItemAction>()
+        //     .SetTarget<EnterBuildingTarget<T>>()
+        //     .AddCondition<IsAtBuildingEntrance<T>>(Comparison.GreaterThanOrEqual, 1)
+        //     .AddEffect<IsInBuilding<T>>(true)
+        //     .AddEffect<IsAtBuildingEntrance<T>>(false);
+    }  
 }

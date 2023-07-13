@@ -23,10 +23,9 @@ public static class CivilianGoalsExtension
             .AddCondition<IsInBuilding<T>>(Comparison.GreaterThanOrEqual, 1);
     }
 
-    public static void AddCraftItemGoal<T>(this GoapSetBuilder builder)
-        where T : Item
+    public static void AddCraftItemGoal(this GoapSetBuilder builder)
     {
-        // builder.AddGoal<EnterBuildingGoal<T>>()
+        builder.AddGoal<CraftItemGoal>();
         //     .AddCondition<IsInBuilding<T>>(Comparison.GreaterThanOrEqual, 1);
     }
 }

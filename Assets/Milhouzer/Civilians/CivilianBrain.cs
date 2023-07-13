@@ -3,11 +3,12 @@ using CrashKonijn.Goap.Behaviours;
 using CrashKonijn.Goap.Interfaces;
 using Demos.Shared.Goals;
 
+using Milhouzer.InventorySystem;
 
 public class CivilianBrain : MonoBehaviour
 {
     private AgentBehaviour agent;
-        private IGoapRunner goapRunner;
+    private IGoapRunner goapRunner;
 
     private void Awake()
     {
@@ -62,5 +63,17 @@ public class CivilianBrain : MonoBehaviour
         {
             this.agent.SetGoal<WanderGoal>(false);
         }
+    }
+
+
+    /// <summary>
+    /// This must work so it can be extended to any ScriptableObject 
+    /// </summary>
+    /// <param name="item"></param>
+    /// <typeparam name="TGoal"></typeparam>
+    protected virtual void SetItemGoal<TGoal>(Item item)
+        where TGoal : ItemGoalBase
+    {
+        
     }
 }

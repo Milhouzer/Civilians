@@ -4,9 +4,16 @@ using UnityEngine;
 
 namespace Milhouzer.InventorySystem
 {
-    public class Item 
+    [CreateAssetMenu(fileName = "Item", menuName = "Inventory System/Item", order = 0)]
+    public class Item : ScriptableObject
     {
         public string Name;
-        public ItemCategory Category;
+        public Sprite Icon;
+        
+        public bool IsCraftable;
+        public List<CraftIngredient> Ingredients = new();
+
+        public bool IsSellable;
+        public int Price;
     }
 }

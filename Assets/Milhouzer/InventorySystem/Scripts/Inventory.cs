@@ -7,7 +7,6 @@ namespace Milhouzer.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField]
         protected List<Item> items = new();
 
         public virtual Item[] Get()
@@ -22,9 +21,10 @@ namespace Milhouzer.InventorySystem
 
         private void InitializeItems()
         {
+            // items.Add(new ApplePie(def));
             for (int i = 0; i < items.Count; i++)
             {
-                items[i] = Instantiate(items[i]);
+                // items[i] = Instantiate(items[i]);
             }
         }
     }

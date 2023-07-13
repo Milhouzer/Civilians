@@ -19,41 +19,43 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
 
     #region Goals
 
-          builder.AddWanderGoal();
+        builder.AddWanderGoal();
 
-          builder.AddGoToBuildingGoalEntrance<FoodShop>();
-          builder.AddGoToBuildingGoalEntrance<FishShop>();
-          
-          builder.AddEnterBuildingGoal<FoodShop>();
-          builder.AddEnterBuildingGoal<FishShop>();
+        builder.AddGoToBuildingGoalEntrance<FoodShop>();
+        builder.AddGoToBuildingGoalEntrance<FishShop>();
+        
+        builder.AddEnterBuildingGoal<FoodShop>();
+        builder.AddEnterBuildingGoal<FishShop>();
 
-          // builder.AddCraftItemGoal<Item>();
+        builder.AddCraftItemGoal();
 
     #endregion
 
     #region Actions
 
-          builder.AddWanderAction();
+        builder.AddWanderAction();
 
-          builder.AddGoToBuildingAction<FoodShop>();
-          builder.AddGoToBuildingAction<FishShop>();
+        builder.AddGoToBuildingAction<FoodShop>();
+        builder.AddGoToBuildingAction<FishShop>();
 
-          builder.AddEnterBuildingAction<FoodShop>();
-          builder.AddEnterBuildingAction<FishShop>();
+        builder.AddEnterBuildingAction<FoodShop>();
+        builder.AddEnterBuildingAction<FishShop>();
           
+        builder.AddCraftItemAction();
+        
     #endregion
         
     #region Target Sensors
 
-            builder.AddWanderTargetSensor();
+        builder.AddWanderTargetSensor();
 
-            builder.AddBuildingSensor<FoodShop>();
-            builder.AddBuildingSensor<FishShop>();
+        builder.AddBuildingSensor<FoodShop>();
+        builder.AddBuildingSensor<FishShop>();
 
-            builder.AddBuildingInteriorSensor<FoodShop>();
-            builder.AddBuildingInteriorSensor<FishShop>();
+        builder.AddBuildingInteriorSensor<FoodShop>();
+        builder.AddBuildingInteriorSensor<FishShop>();
 
-            // builder.AddShopSensor<>();
+        // builder.AddShopSensor<>();
 
     #endregion
         

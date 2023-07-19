@@ -535,6 +535,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3383372171931457584, guid: 1c4bd0baad5d6284da0064ab6fe918ab, type: 3}
+      propertyPath: items.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e9da8eb2f4439dd46b2673bec0b4a9ad, type: 2}
     - target: {fileID: 6513025915397413376, guid: 1c4bd0baad5d6284da0064ab6fe918ab, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -836,6 +840,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0294f116793365a49b3adb8bd6ea450f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 8374949573509339323}
+  itemToCraft: {fileID: 11400000, guid: 527e9fb802759604aa5b8a205288aca1, type: 2}
 --- !u!114 &8374949573509339320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,4 +895,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d42d98494a932545b72ab33c17d3c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - {fileID: 11400000, guid: e9da8eb2f4439dd46b2673bec0b4a9ad, type: 2}

@@ -10,6 +10,12 @@ public class CivilianBrain : MonoBehaviour
     private AgentBehaviour agent;
     private IGoapRunner goapRunner;
 
+    [SerializeField]
+    private Inventory inventory;
+    [SerializeField]
+    private Item itemToCraft;
+    private bool crafted;
+
     private void Awake()
     {
         this.agent = this.GetComponent<AgentBehaviour>();
@@ -58,7 +64,12 @@ public class CivilianBrain : MonoBehaviour
             this.agent.SetGoal<EnterBuildingGoal<FishShop>>(false);
         }else if(GoapTester.Instance.GoToFoodShop)
         {
-            this.agent.SetGoal<EnterBuildingGoal<FoodShop>>(false);
+            if(!crafted)
+            {
+                SetItemGoal<CraftItemGoal>(itemToCraft);
+                crafted = true;
+            }
+            // this.agent.SetGoal<EnterBuildingGoal<FoodShop>>(false);
         }else
         {
             this.agent.SetGoal<WanderGoal>(false);
@@ -74,6 +85,6 @@ public class CivilianBrain : MonoBehaviour
     protected virtual void SetItemGoal<TGoal>(Item item)
         where TGoal : ItemGoalBase
     {
-        
+        agent.SetItemGoal<TGoal>(item, false);
     }
 }

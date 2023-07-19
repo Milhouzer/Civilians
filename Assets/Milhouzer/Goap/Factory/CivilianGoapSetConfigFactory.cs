@@ -19,6 +19,8 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
 
     #region Goals
 
+        builder.AddCraftItemGoal();
+        
         builder.AddWanderGoal();
 
         builder.AddGoToBuildingGoalEntrance<FoodShop>();
@@ -27,11 +29,11 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
         builder.AddEnterBuildingGoal<FoodShop>();
         builder.AddEnterBuildingGoal<FishShop>();
 
-        builder.AddCraftItemGoal();
 
     #endregion
 
     #region Actions
+        builder.AddCraftItemAction();
 
         builder.AddWanderAction();
 
@@ -40,8 +42,6 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
 
         builder.AddEnterBuildingAction<FoodShop>();
         builder.AddEnterBuildingAction<FishShop>();
-          
-        builder.AddCraftItemAction();
         
     #endregion
         
@@ -60,6 +60,7 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
     #endregion
         
     #region World Sensors
+        builder.AddHasCraftIngredientsSensor();
 
         builder.AddIsInFrontOfBuildingSensor<FoodShop>();
         builder.AddIsInFrontOfBuildingSensor<FishShop>();

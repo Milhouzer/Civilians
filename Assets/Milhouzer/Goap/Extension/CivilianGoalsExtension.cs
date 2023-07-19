@@ -25,7 +25,7 @@ public static class CivilianGoalsExtension
 
     public static void AddCraftItemGoal(this GoapSetBuilder builder)
     {
-        builder.AddGoal<CraftItemGoal>();
-        //     .AddCondition<IsInBuilding<T>>(Comparison.GreaterThanOrEqual, 1);
+        builder.AddGoal<CraftItemGoal>()
+            .AddCondition<HasCraftedItems>(Comparison.GreaterThanOrEqual, 1);
     }
 }

@@ -12,7 +12,7 @@ namespace Milhouzer.InventorySystem
         
         public bool IsCraftable;
         public List<CraftIngredient> Ingredients = new();
-
+        public float CraftingDuration = 1f;
         public bool IsSellable;
         public int Price;
     }

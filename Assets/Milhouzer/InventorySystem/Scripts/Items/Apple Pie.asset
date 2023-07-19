@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286ea535652a51d4ea4ebc316cca976e, type: 3}
-  m_Name: ApplePie
+  m_Name: Apple Pie
   m_EditorClassIdentifier: 
   Name: Apple Pie
   Icon: {fileID: 0}
@@ -18,9 +18,6 @@ MonoBehaviour:
   Ingredients:
   - Name: Apple
     amount: 3
-  - Name: Sugar
-    amount: 2
-  - Name: Egg
-    amount: 1
+  CraftingDuration: 1
   IsSellable: 1
   Price: 5

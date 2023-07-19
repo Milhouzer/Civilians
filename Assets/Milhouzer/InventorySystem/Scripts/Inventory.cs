@@ -7,25 +7,71 @@ namespace Milhouzer.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
+        private bool isCrafting;
+        public bool IsCrafting { get => isCrafting; }
+
+        [SerializeField]
         protected List<Item> items = new();
 
-        public virtual Item[] Get()
+        public void Add(Item item)
         {
-            return items.ToArray();
+            items.Add(item);
         }
 
-        protected virtual void Awake() 
+        public void Remove(Item item)
         {
-            InitializeItems();
+            items.Remove(GetItem(item));
         }
 
-        private void InitializeItems()
+        public void Remove(string itemName)
         {
-            // items.Add(new ApplePie(def));
+            items.Remove(GetItem(itemName));
+        }
+
+        public bool HasItem(Item item)
+        {
+            return items.Find(x => x.Name == item.Name);
+        }
+        
+        public bool HasItem(string itemName)
+        {
+            return items.Find(x => x.Name == itemName);
+        }
+
+        public Item GetItem(Item item)
+        {
+            return items.FirstOrDefault(x => x.Name == item.Name);
+        }
+
+        public Item GetItem(string itemName)
+        {
+            return items.FirstOrDefault(x => x.Name == itemName);
+        }
+
+        private void Awake() {
             for (int i = 0; i < items.Count; i++)
             {
-                // items[i] = Instantiate(items[i]);
+                items[i] = Instantiate(items[i]);
             }
+        }
+
+        public bool Craft(Item item)
+        {
+            StartCoroutine(CraftCoroutine(item));
+            return true;
+        }
+
+        private IEnumerator CraftCoroutine(Item item)
+        {
+            isCrafting = true;
+            yield return new WaitForSeconds(item.CraftingDuration);
+            List<CraftIngredient> ingredients = item.Ingredients;
+            foreach(CraftIngredient ingredient in ingredients)
+            {
+                Remove(ingredient.Name);
+            }
+            Add(item);
+            isCrafting = false;
         }
     }
 }

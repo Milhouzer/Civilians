@@ -15,4 +15,11 @@ public static class CivilianWorldSensorExtension
         builder.AddWorldSensor<IsInBuildingSensor<T>>()
             .SetKey<IsInBuilding<T>>();
     }
+
+
+    public static void AddHasCraftIngredientsSensor(this GoapSetBuilder builder)
+    {
+        builder.AddWorldSensor<HasCraftIngredientsSensor>()
+            .SetKey<HasCraftIngredients>();
+    }
 }

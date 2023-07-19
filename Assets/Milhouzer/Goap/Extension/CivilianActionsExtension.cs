@@ -23,10 +23,10 @@ public static class CivilianActionsExtension
     
     public static void AddCraftItemAction(this GoapSetBuilder builder)
     {
-        // builder.AddAction<CraftItemAction>()
-        //     .SetTarget<EnterBuildingTarget<T>>()
-        //     .AddCondition<IsAtBuildingEntrance<T>>(Comparison.GreaterThanOrEqual, 1)
-        //     .AddEffect<IsInBuilding<T>>(true)
+        builder.AddAction<CraftItemAction>()
+            .SetTarget<CraftItemTarget>()
+            .AddCondition<HasCraftIngredients>(Comparison.GreaterThanOrEqual, 1)
+            .AddEffect<HasCraftedItems>(true);
         //     .AddEffect<IsAtBuildingEntrance<T>>(false);
     }  
 }

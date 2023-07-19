@@ -66,7 +66,7 @@ public class CivilianBrain : MonoBehaviour
         {
             if(!crafted)
             {
-                SetItemGoal<CraftItemGoal>(itemToCraft);
+                SetItemGoal<GetItemGoal>(itemToCraft);
                 crafted = true;
             }
             // this.agent.SetGoal<EnterBuildingGoal<FoodShop>>(false);

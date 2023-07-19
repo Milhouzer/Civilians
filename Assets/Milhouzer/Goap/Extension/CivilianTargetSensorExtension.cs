@@ -15,4 +15,11 @@ public static class CivilianTargetSensorExtension
         builder.AddTargetSensor<ClosestBuildingInteriorSensor<T>>()
             .SetTarget<EnterBuildingTarget<T>>();
     }
+    
+
+    public static void AddFindShopSellingItemSensor(this GoapSetBuilder builder)
+    {
+        builder.AddTargetSensor<FindShopSellingItem>()
+            .SetTarget<BuyItemTarget>();
+    }
 }

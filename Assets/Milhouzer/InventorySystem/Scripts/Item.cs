@@ -10,6 +10,7 @@ namespace Milhouzer.InventorySystem
         public string Name;
         public Sprite Icon;
         
+        public ItemCategory Category;
         public bool IsCraftable;
         public List<CraftIngredient> Ingredients = new();
         public float CraftingDuration = 1f;

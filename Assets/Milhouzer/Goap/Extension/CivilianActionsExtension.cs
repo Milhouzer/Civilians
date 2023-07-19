@@ -26,7 +26,14 @@ public static class CivilianActionsExtension
         builder.AddAction<CraftItemAction>()
             .SetTarget<CraftItemTarget>()
             .AddCondition<HasCraftIngredients>(Comparison.GreaterThanOrEqual, 1)
-            .AddEffect<HasCraftedItems>(true);
-        //     .AddEffect<IsAtBuildingEntrance<T>>(false);
-    }  
+            .AddEffect<HasItems>(true);
+    }
+
+    public static void AddBuyItemAction(this GoapSetBuilder builder)
+    {
+        builder.AddAction<BuyItemAction>()
+            .SetTarget<BuyItemTarget>()
+            .AddCondition<CanBuyItem>(Comparison.GreaterThanOrEqual, 1)
+            .AddEffect<HasItems>(true);
+    }
 }

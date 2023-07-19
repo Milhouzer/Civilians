@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 using CrashKonijn.Goap.Behaviours;
 using CrashKonijn.Goap.Interfaces;
 
@@ -8,9 +10,12 @@ public class CivilianMovement : MonoBehaviour
     private ITarget currentTarget;
     private bool shouldMove;
 
+    private NavMeshAgent navMeshAgent;
+
     private void Awake()
     {
         this.agent = this.GetComponent<AgentBehaviour>();
+        this.navMeshAgent = this.GetComponent<NavMeshAgent>();
     }
 
     private void OnEnable()
@@ -36,6 +41,11 @@ public class CivilianMovement : MonoBehaviour
     {
         this.currentTarget = target;
         this.shouldMove = !inRange;
+
+        if(this.currentTarget != null)
+        {
+            this.navMeshAgent.SetDestination(this.currentTarget.Position);
+        }
     }
 
     private void OnTargetOutOfRange(ITarget target)
@@ -51,7 +61,7 @@ public class CivilianMovement : MonoBehaviour
         if (this.currentTarget == null)
             return;
         
-        this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(this.currentTarget.Position.x, this.transform.position.y, this.currentTarget.Position.z), Time.deltaTime);
+        // this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(this.currentTarget.Position.x, this.transform.position.y, this.currentTarget.Position.z), Time.deltaTime);
     }
 
     private void OnDrawGizmos()

@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Civilian : MonoBehaviour
+using Milhouzer.Interfaces;
+
+public class Civilian : MonoBehaviour, IInteractable
 {
-    // private Building targetBuilding;
-    // public Building TargetBuilding
-    // {
-    //     get { return targetBuilding; }
-    //     set { targetBuilding = value; }
-    // }
+    private bool isInteracting;
+    public bool IsInteracting { get => isInteracting; }
 
     Dictionary<BuildingEnums.AreaType, List<Building>> visitedAreas = new();
 
@@ -44,5 +42,13 @@ public class Civilian : MonoBehaviour
         return count > 0;
     }
 
+    public void Interact()
+    {
+        isInteracting = true;
+    }
 
+    public void StopInteract()
+    {
+
+    }
 }

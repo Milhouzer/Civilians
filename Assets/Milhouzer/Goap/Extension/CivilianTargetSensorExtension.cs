@@ -22,4 +22,10 @@ public static class CivilianTargetSensorExtension
         builder.AddTargetSensor<FindShopSellingItem>()
             .SetTarget<BuyItemTarget>();
     }
+
+    public static void AddCollectItemLocationSensor(this GoapSetBuilder builder)
+    {
+        // builder.AddTargetSensor<CollectItemLocationSensor>()
+        //     .SetTarget<CollectItemTarget>();
+    }
 }

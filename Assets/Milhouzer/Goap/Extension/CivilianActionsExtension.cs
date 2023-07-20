@@ -36,4 +36,12 @@ public static class CivilianActionsExtension
             .AddCondition<CanBuyItem>(Comparison.GreaterThanOrEqual, 1)
             .AddEffect<HasItems>(true);
     }
+
+    public static void AddCollectItemAction(this GoapSetBuilder builder)
+    {
+        // builder.AddAction<CollectItemAction>()
+        //     .SetTarget<CollectItemTarget>()
+        //     .AddCondition<CanCollectItem>(Comparison.GreaterThanOrEqual, 1)
+        //     .AddEffect<HasItems>(true);
+    }
 }

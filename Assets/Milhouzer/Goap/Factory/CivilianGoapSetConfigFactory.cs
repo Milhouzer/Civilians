@@ -35,7 +35,7 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
     #region Actions
         builder.AddCraftItemAction();
         builder.AddBuyItemAction();
-        // builder.AddHarvestItemAction();
+        builder.AddCollectItemAction();
 
         builder.AddWanderAction();
 
@@ -51,6 +51,7 @@ public class CivilianGoapSetConfigFactory : GoapSetFactoryBase
 
         builder.AddWanderTargetSensor();
         builder.AddFindShopSellingItemSensor();
+        builder.AddCollectItemLocationSensor();
 
         // builder.AddBuildingSensor<FoodShop>();
         // builder.AddBuildingSensor<FishShop>();

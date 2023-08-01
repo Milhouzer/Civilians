@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +9,10 @@ using CrashKonijn.Goap.Behaviours;
 public class TasksPlanner : MonoBehaviour
 {
     private List<TaskBase> tasks = new List<TaskBase>();
+    
+    private void Awake() {
+        TimeCycle.OnTick += OnTimeChanged;    
+    }
 
     public void AddTask<TGoal>() where TGoal : GoalBase
     {
@@ -14,12 +20,28 @@ public class TasksPlanner : MonoBehaviour
         Debug.Log(tasks.Count);
     }
 
-    // Base class for the Task<T> classes to be stored in the list
-    private class TaskBase { }
+    private void OnTimeChanged(DateTime time)
+    {
+        TaskBase matchingTask = tasks.FirstOrDefault(task => task.executeTime == time);
 
-    // Task<T> class to hold a specific goal type
+        if (matchingTask != null)
+        {
+            StartTask(matchingTask);
+        }
+    }
+
+    private void StartTask(TaskBase task)
+    {
+
+    }
+
+    private class TaskBase 
+    { 
+        public DateTime executeTime;
+    }
+
     private class Task<T> : TaskBase where T : GoalBase
     {
-        // Implement your task logic here
+        
     }
 }

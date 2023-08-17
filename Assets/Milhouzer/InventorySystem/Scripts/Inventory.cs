@@ -30,6 +30,16 @@ namespace Milhouzer.InventorySystem
 
         public bool HasItem(Item item)
         {
+            return HasItem(item, 1);
+        }
+
+        public bool HasItemAmount(ItemAmount itemAmount)
+        {
+            return HasItem(itemAmount.item, itemAmount.amount);
+        }
+
+        public bool HasItem(Item item, int amount)
+        {
             return items.Find(x => x.Name == item.Name);
         }
         

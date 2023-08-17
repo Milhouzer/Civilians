@@ -9,6 +9,11 @@ namespace CrashKonijn.Goap.Interfaces
         AgentState State { get; }
         IGoapSet GoapSet { get; }
         IGoalBase CurrentGoal { get; }
+        
+        // Milhouzer //
+        IGoalData CurrentGoalData { get; }
+        // --------- //
+
         IActionBase CurrentAction { get; }
         IActionData CurrentActionData { get; }
         IWorldData WorldData { get; }
@@ -19,9 +24,9 @@ namespace CrashKonijn.Goap.Interfaces
 
         void Run();
         
-        void SetGoal<TGoal>(bool endAction) where TGoal : IGoalBase;
+        void SetGoal<TGoal>(bool endAction, IGoalTarget target) where TGoal : IGoalBase;
 
-        void SetGoal(IGoalBase goal, bool endAction);
+        void SetGoal(IGoalBase goal, bool endAction, IGoalTarget target);
         void SetAction(IActionBase action, List<IActionBase> path, ITarget target);
         void EndAction(bool enqueue = true);
         void SetDistanceMultiplierSpeed(float speed);

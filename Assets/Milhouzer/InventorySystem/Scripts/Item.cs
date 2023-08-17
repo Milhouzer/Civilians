@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using CrashKonijn.Goap.Interfaces;
+
+
 namespace Milhouzer.InventorySystem
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Inventory System/Item", order = 0)]

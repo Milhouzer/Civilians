@@ -19,7 +19,7 @@ public class TimeCycle : MonoBehaviour
 
     private void Start() 
     {
-        now = new DateTime(0);
+        now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
     }
 
     void Update()

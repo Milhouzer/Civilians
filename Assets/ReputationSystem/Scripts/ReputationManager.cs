@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Milhouzer.Utility;
+
 public class ReputationManager : Singleton<ReputationManager>
 {
     [SerializeField]

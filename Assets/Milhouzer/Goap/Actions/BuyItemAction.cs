@@ -14,11 +14,9 @@ public class BuyItemAction : ActionBase<BuyItemAction.Data>
 
     public override void Start(IMonoAgent agent, Data data)
     {
-        AgentBehaviour agentBehaviour = agent.GetComponent<AgentBehaviour>();
-        Inventory inventory = agentBehaviour.GetComponent<Inventory>();
-        if(inventory != null && agentBehaviour.CurrentGoal is ItemGoalBase itemGoal)
+        Inventory inventory = agent.GetComponent<Inventory>();
+        if(inventory != null)
         {
-            data.item = itemGoal.item;
             data.inventory = inventory;
         }
     }
@@ -30,7 +28,12 @@ public class BuyItemAction : ActionBase<BuyItemAction.Data>
         if (data.RemainingDistance > 0.5f)
             return ActionRunState.Continue;
 
-        data.inventory.Add(data.item);
+        object target;
+        agent.CurrentGoalData.Target.GetTarget(out target);
+        if(target is Item targetItem)
+        {
+            data.inventory.Add(targetItem);
+        }
 
         return ActionRunState.Stop;
     }
@@ -39,11 +42,10 @@ public class BuyItemAction : ActionBase<BuyItemAction.Data>
     {
     }
 
-    public class Data : IItemActionData
+    public class Data : IActionData
     {
         public ITarget Target { get; set; }
         public float RemainingDistance { get; set; }
-        public Item item { get; set; }
         public Inventory inventory { get; set; }
     }
 }

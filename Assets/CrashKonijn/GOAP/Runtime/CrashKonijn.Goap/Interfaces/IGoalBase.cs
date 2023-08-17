@@ -6,5 +6,6 @@ namespace CrashKonijn.Goap.Interfaces
     public interface IGoalBase : IAction, IHasConfig<IGoalConfig>
     {
         public int GetCost(IWorldData data);
+        IGoalData GetData();
     }
 }

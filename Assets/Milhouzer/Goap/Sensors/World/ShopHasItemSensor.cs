@@ -16,7 +16,6 @@ public class ShopHasItemSensor : LocalWorldSensorBase
     public override void Created()
     {
         this.shops = BuildingManager.GetBuildings<Shop>();
-        Debug.Log("Buildings " + shops.Count);  
     }
 
     public override void Update()
@@ -31,11 +30,15 @@ public class ShopHasItemSensor : LocalWorldSensorBase
         if (agentBehaviour == null)
             return false;
 
-        if(agentBehaviour.CurrentGoal is ItemGoalBase itemGoal)
+        object target;
+        agentBehaviour.CurrentGoalData.Target.GetTarget(out target);
+
+        Debug.Log(agentBehaviour.CurrentGoal + " " + agentBehaviour.CurrentGoalData + " Can buy items : " + target);
+        if(target is Item targetItem)
         {
             foreach(Shop shop in shops)
             {
-                if(shop.Category == itemGoal.item.Category)
+                if(shop.inventory.HasItem(targetItem))
                     return true;
             }
         }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 using Milhouzer.InventorySystem;
 
-[RequireComponent(typeof(ShopInventory))]
+[RequireComponent(typeof(Inventory))]
 public class Shop : Building
 {
+    public Inventory inventory;
     public ItemCategory Category;
 }

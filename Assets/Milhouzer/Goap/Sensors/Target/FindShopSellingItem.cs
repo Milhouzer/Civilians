@@ -41,12 +41,15 @@ public class FindShopSellingItem : LocalTargetSensorBase
         if (agentBehaviour == null)
             return null;
 
-        if(agentBehaviour.CurrentGoal is ItemGoalBase itemGoal)
+        object target;
+        agentBehaviour.CurrentGoalData.Target.GetTarget(out target);
+
+        if(target is Item targetItem)
         {
             for (int i = 0; i < inventories.Count; i++)
             {
                 Inventory inventory = inventories[i];
-                if(inventory.HasItem(itemGoal.item))
+                if(inventory.HasItem(targetItem))
                 {
                     return new TransformTarget(buildings[i].Entrance);
                 }

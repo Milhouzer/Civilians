@@ -19,26 +19,26 @@ public class HasCraftIngredientsSensor : LocalWorldSensorBase
 
     public override SenseValue Sense(IMonoAgent agent, IComponentReference references)
     {
-        Inventory inventory = references.GetCachedComponent<Inventory>();
+        // Inventory inventory = references.GetCachedComponent<Inventory>();
 
-        AgentBehaviour agentBehaviour = references.GetCachedComponent<AgentBehaviour>();
+        // AgentBehaviour agentBehaviour = references.GetCachedComponent<AgentBehaviour>();
         
-        if (inventory == null || agentBehaviour == null)
-            return false;
+        // if (inventory == null || agentBehaviour == null)
+        //     return false;
 
-        if(agentBehaviour.CurrentGoal is ItemGoalBase itemGoal)
-        {
-            List<CraftIngredient> ingredients = itemGoal.item.Ingredients;
-            foreach(CraftIngredient ingredient in ingredients)
-            {
-                if(!inventory.HasItem(ingredient.Name))
-                {
-                    return false;
-                }
-            }
+        // if(agentBehaviour.CurrentGoal is ItemGoalBase itemGoal)
+        // {
+        //     List<CraftIngredient> ingredients = itemGoal.item.Ingredients;
+        //     foreach(CraftIngredient ingredient in ingredients)
+        //     {
+        //         if(!inventory.HasItem(ingredient.Name))
+        //         {
+        //             return false;
+        //         }
+        //     }
 
-            return true;
-        }
+        //     return true;
+        // }
         
         return false;
     }

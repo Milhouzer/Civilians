@@ -16,27 +16,25 @@ public class CraftItemAction : ActionBase<CraftItemAction.Data>
 
     public override void Start(IMonoAgent agent, Data data)
     {
-        AgentBehaviour agentBehaviour = agent.GetComponent<AgentBehaviour>();
-        Inventory inventory = agentBehaviour.GetComponent<Inventory>();
-        if(inventory != null && agentBehaviour.CurrentGoal is ItemGoalBase itemGoal)
+        Inventory inventory = agent.GetComponent<Inventory>();
+        if(inventory != null)
         {
-            data.item = itemGoal.item;
             data.inventory = inventory;
         }
     }
 
     public override ActionRunState Perform(IMonoAgent agent, Data data, ActionContext context)
     {
-        if(!crafted)
-        {
-            data.inventory.Craft(data.item);
-            crafted = true;
-        }
+        // if(!crafted)
+        // {
+        //     data.inventory.Craft(data.item);
+        //     crafted = true;
+        // }
 
-        while(data.inventory.IsCrafting)
-        {
-            return ActionRunState.Continue;
-        }
+        // while(data.inventory.IsCrafting)
+        // {
+        //     return ActionRunState.Continue;
+        // }
         return ActionRunState.Stop;
     }
 
@@ -44,10 +42,9 @@ public class CraftItemAction : ActionBase<CraftItemAction.Data>
     {
     }
 
-    public class Data : IItemActionData
+    public class Data : IActionData
     {
         public ITarget Target { get; set; }
-        public Item item { get; set; }
         public Inventory inventory { get; set; }
     }
 }

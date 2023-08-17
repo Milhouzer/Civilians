@@ -30,6 +30,12 @@ namespace CrashKonijn.Goap.Behaviours
         }
 
         public IGoalBase CurrentGoal { get; private set; }
+
+        // Milhouzer //
+        public IGoalData CurrentGoalData { get; private set; }
+
+        // --------- //
+
         public IActionBase CurrentAction  { get;  private set;}
         public IActionData CurrentActionData { get; private set; }
         public List<IActionBase> CurrentActionPath { get; private set; } = new List<IActionBase>();
@@ -175,19 +181,27 @@ namespace CrashKonijn.Goap.Behaviours
             return this.CurrentAction.IsInRange(this, distance, this.CurrentActionData, this.Injector);
         }
 
-        public void SetGoal<TGoal>(bool endAction)
+        public void SetGoal<TGoal>(bool endAction, IGoalTarget target)
             where TGoal : IGoalBase
         {
-            this.SetGoal(this.GoapSet.ResolveGoal<TGoal>(), endAction);
+            this.SetGoal(this.GoapSet.ResolveGoal<TGoal>(), endAction, target);
         }
 
-        public void SetGoal(IGoalBase goal, bool endAction)
+        public void SetGoal(IGoalBase goal, bool endAction , IGoalTarget target)
         {
             if (goal == this.CurrentGoal)
                 return;
             
             this.CurrentGoal = goal;
+
+            // Milhouzer //
+            var data = goal.GetData();
+            data.Target = target;
             
+            this.CurrentGoalData = data;
+
+            // ----------// 
+
             if (this.CurrentAction == null)
                 this.GoapSet.Agents.Enqueue(this);
             

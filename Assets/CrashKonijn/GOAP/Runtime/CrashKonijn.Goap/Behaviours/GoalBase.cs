@@ -5,6 +5,21 @@ using CrashKonijn.Goap.Interfaces;
 
 namespace CrashKonijn.Goap.Behaviours
 {
+    public abstract class GoalBase<TGoalData> : GoalBase
+        where TGoalData : IGoalData, new()
+    {        
+        public override IGoalData GetData()
+        {
+            return this.CreateData();
+        }
+
+        public virtual TGoalData CreateData()
+        {
+            TGoalData data = new TGoalData();
+            return data;
+        }
+    }
+
     public abstract class GoalBase : IGoalBase
     {
         private IGoalConfig config;
@@ -23,5 +38,7 @@ namespace CrashKonijn.Goap.Behaviours
         {
             return this.config.BaseCost;
         }
+
+        public abstract IGoalData GetData();
     }
 }

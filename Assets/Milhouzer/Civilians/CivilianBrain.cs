@@ -1,90 +1,106 @@
 using UnityEngine;
+using System;
+using System.Reflection;
 using CrashKonijn.Goap.Behaviours;
 using CrashKonijn.Goap.Interfaces;
-using Demos.Shared.Goals;
 
 using Milhouzer.InventorySystem;
+using Milhouzer.Civilian.Tasks;
 
-public class CivilianBrain : MonoBehaviour
+namespace Milhouzer.Civilian
 {
-    private AgentBehaviour agent;
-    private IGoapRunner goapRunner;
-
-    [SerializeField]
-    private Inventory inventory;
-    [SerializeField]
-    private Item itemToCraft;
-    private bool crafted;
-
-    private void Awake()
+    public class CivilianBrain : MonoBehaviour, ITaskRunner
     {
-        this.agent = this.GetComponent<AgentBehaviour>();
-        this.goapRunner = FindObjectOfType<GoapRunnerBehaviour>();
-        agent.GoapSet = this.goapRunner.GetGoapSet("Civilian");
-    }
+        private AgentBehaviour agent;
+        private IGoapRunner goapRunner;
 
-    private void OnEnable()
-    {
-        this.agent.Events.OnActionStop += this.OnActionStop;
-        this.agent.Events.OnNoActionFound += this.OnNoActionFound;
-        this.agent.Events.OnGoalCompleted += this.OnGoalCompleted;
-    }
+        private ITaskPlanner taskPlanner;
 
-    private void OnDisable()
-    {
-        this.agent.Events.OnActionStop -= this.OnActionStop;
-        this.agent.Events.OnNoActionFound -= this.OnNoActionFound;
-        this.agent.Events.OnGoalCompleted -= this.OnGoalCompleted;
-    }
+        bool lookingForGoal = true;
 
-    private void Start()
-    {
-        this.agent.SetGoal<WanderGoal>(false);
-    }
-    
-    private void OnNoActionFound(IGoalBase goal)
-    {
-        this.agent.SetGoal<WanderGoal>(false);
-    }
-
-    private void OnGoalCompleted(IGoalBase goal)
-    {
-        Debug.Log(goal + " completed");
-    }
-
-    private void OnActionStop(IActionBase action)
-    {
-        this.DetermineGoal();
-    }
-
-    protected virtual void DetermineGoal()
-    {
-        if(GoapTester.Instance.GoToFishShop)
+        private void Awake()
         {
-            this.agent.SetGoal<EnterBuildingGoal<FishShop>>(false);
-        }else if(GoapTester.Instance.GoToFoodShop)
-        {
-            if(!crafted)
-            {
-                SetItemGoal<GetItemGoal>(itemToCraft);
-                crafted = true;
-            }
-            // this.agent.SetGoal<EnterBuildingGoal<FoodShop>>(false);
-        }else
-        {
-            this.agent.SetGoal<WanderGoal>(false);
+            this.agent = this.GetComponent<AgentBehaviour>();
+            this.goapRunner = FindObjectOfType<GoapRunnerBehaviour>();
+            taskPlanner = GetComponent<ITaskPlanner>();
+            agent.GoapSet = this.goapRunner.GetGoapSet("Civilian");
         }
-    }
+
+        private void OnEnable()
+        {
+            this.agent.Events.OnActionStop += this.OnActionStop;
+            this.agent.Events.OnNoActionFound += this.OnNoActionFound;
+            this.agent.Events.OnGoalCompleted += this.OnGoalCompleted;
+        }
+
+        private void OnDisable()
+        {
+            this.agent.Events.OnActionStop -= this.OnActionStop;
+            this.agent.Events.OnNoActionFound -= this.OnNoActionFound;
+            this.agent.Events.OnGoalCompleted -= this.OnGoalCompleted;
+        }
+
+        private void Start()
+        {
+
+        }
+        
+        private void OnNoActionFound(IGoalBase goal)
+        {
+
+        }
+
+        private void OnGoalCompleted(IGoalBase goal)
+        {
+            lookingForGoal = true;
+            Debug.Log(transform +  " has completed their goal");
+        }
+
+        private void OnActionStop(IActionBase action)
+        {
+            // this.GetNextTask();
+        }
+
+        private void Update() {
+            DetermineGoal();
+        }
+
+        private void DetermineGoal()
+        {
+            if(lookingForGoal)
+            {
+                GetNextTask();
+            }else
+            {
+                
+                Debug.Log(transform +  " has goal");
+            }
+        }
+
+        private void GetNextTask()
+        {
+            TaskBase task = taskPlanner.CurrentTask;
+            if(task == null)
+                return;
 
 
-    /// <summary>
-    /// This must work so it can be extended to any ScriptableObject 
-    /// </summary>
-    /// <param name="item"></param>
-    /// <typeparam name="TGoal"></typeparam>
-    protected virtual void SetItemGoal<TGoal>(Item item)
-        where TGoal : ItemGoalBase
-    {
-        agent.SetItemGoal<TGoal>(item, false);
+            Type taskGenericType = task.GetGenericTypeDefinition();
+
+            // Task is valid
+            if(taskGenericType != typeof(TaskBase))
+            {
+                MethodInfo setGoalMethod = typeof(CivilianBrain).GetMethod("SetGoal", BindingFlags.NonPublic | BindingFlags.Instance);
+                MethodInfo setGoalTyped = setGoalMethod.MakeGenericMethod(taskGenericType);
+                IGoalTarget target = task.Data.target;
+                
+                setGoalTyped.Invoke(this, new object[] { false , target });
+            }
+        }
+
+        private void SetGoal<T>(bool endAction, IGoalTarget target) where T : GoalBase
+        {
+            agent.SetGoal<T>(endAction, target);
+            lookingForGoal = false;
+        }
     }
 }

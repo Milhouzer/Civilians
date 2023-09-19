@@ -1,4 +1,4 @@
-using Milhouzer.Interfaces;
+using Milhouzer.Utility.Interfaces;
 using Milhouzer.Utility;
 using UnityEngine;
 

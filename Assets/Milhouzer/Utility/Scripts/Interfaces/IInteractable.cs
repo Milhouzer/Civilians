@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Milhouzer.Interfaces
+namespace Milhouzer.Utility.Interfaces
 {
     public interface IInteractable
     {

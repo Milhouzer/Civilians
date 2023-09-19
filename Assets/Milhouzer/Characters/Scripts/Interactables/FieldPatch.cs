@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Milhouzer.Interfaces;
 using Milhouzer.Utility;
 
 namespace Milhouzer.InventorySystem

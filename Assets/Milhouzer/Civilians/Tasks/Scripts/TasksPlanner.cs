@@ -6,6 +6,7 @@ using UnityEngine;
 
 using CrashKonijn.Goap.Behaviours;
 using CrashKonijn.Goap.Interfaces;
+using Milhouzer.DayNightCycle;
 
 namespace Milhouzer.Civilian.Tasks
 {

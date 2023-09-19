@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Milhouzer.Utility;
-using Milhouzer.Character;
 
-namespace Milhouzer.InventorySystem
+namespace Milhouzer.Character
 {
     public class WaterPond : InteractableBase
     {
@@ -13,7 +12,6 @@ namespace Milhouzer.InventorySystem
         {
             base.Interact(interactor);
             ICharacter character = interactor.GetComponent<ICharacter>();
-            // Milhouzer.Character.CharacterController controller = interactor.GetComponent<Milhouzer.Character.CharacterController>();
             character.ChangeState(new FishingState(character));
         }
     }

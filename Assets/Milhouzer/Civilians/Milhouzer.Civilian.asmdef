@@ -1,0 +1,21 @@
+{
+    "name": "Milhouzer.Civilian",
+    "rootNamespace": "",
+    "references": [
+        "GUID:78b9b21a6785e824e85bef6b5f9e444b",
+        "GUID:d544195f820fbf34d88daf96be5e1bb1",
+        "GUID:3944beed2d1c63745b2132eadb704658",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:6eb7f39de256eea4bb8708df2c32e1ba",
+        "GUID:e52adf591423434e8c16eeb452c84a82"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

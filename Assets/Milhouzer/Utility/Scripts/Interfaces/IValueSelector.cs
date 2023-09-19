@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Milhouzer.Utility
+namespace Milhouzer.Utility.Interfaces
 {
     // TODO : Change for abstract class, make SetValue protected and define AddValueChangedListener in the class.
     public interface IValueSelector<T>

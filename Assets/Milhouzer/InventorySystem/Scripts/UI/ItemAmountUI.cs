@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Milhouzer.Utility;
+using Milhouzer.Utility.Interfaces;
 
 namespace Milhouzer.InventorySystem
 {

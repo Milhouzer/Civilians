@@ -1,37 +1,40 @@
 using System;
 using UnityEngine;
 
-public class TimeCycle : MonoBehaviour
+namespace Milhouzer.DayNightCycle
 {
-    [SerializeField]
-    private float realTimeTickDuration;
-    [SerializeField]
-    private float tickAmount;
-
-    private float tickTimer;
-    private int Tick;
-
-    public delegate void TickDelegate(DateTime time);
-    public static event TickDelegate OnTick;
-
-    private DateTime now;
-    public DateTime Now { get => now; }
-
-    private void Start() 
+    public class TimeCycle : MonoBehaviour
     {
-        now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-    }
+        [SerializeField]
+        private float realTimeTickDuration;
+        [SerializeField]
+        private float tickAmount;
 
-    void Update()
-    {
-        tickTimer += Time.deltaTime;
-        if(tickTimer > realTimeTickDuration)
+        private float tickTimer;
+        private int Tick;
+
+        public delegate void TickDelegate(DateTime time);
+        public static event TickDelegate OnTick;
+
+        private DateTime now;
+        public DateTime Now { get => now; }
+
+        private void Start() 
         {
-            tickTimer -= realTimeTickDuration;
-            Tick++;
+            now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+        }
 
-            now = now.AddMinutes(tickAmount);
-            OnTick?.Invoke(now);
+        void Update()
+        {
+            tickTimer += Time.deltaTime;
+            if(tickTimer > realTimeTickDuration)
+            {
+                tickTimer -= realTimeTickDuration;
+                Tick++;
+
+                now = now.AddMinutes(tickAmount);
+                OnTick?.Invoke(now);
+            }
         }
     }
 }

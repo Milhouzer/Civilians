@@ -1,0 +1,18 @@
+{
+    "name": "Milhouzer.Characters",
+    "rootNamespace": "",
+    "references": [
+        "GUID:78b9b21a6785e824e85bef6b5f9e444b",
+        "GUID:d544195f820fbf34d88daf96be5e1bb1",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

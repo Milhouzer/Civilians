@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-using Milhouzer.Utility;
+using Milhouzer.Utility.Interfaces;
 
 namespace Milhouzer.InventorySystem
 {

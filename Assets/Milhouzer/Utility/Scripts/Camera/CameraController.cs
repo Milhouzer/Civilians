@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Milhouzer.Interfaces;
-
 namespace Milhouzer
 {
     public class CameraController : MonoBehaviour 

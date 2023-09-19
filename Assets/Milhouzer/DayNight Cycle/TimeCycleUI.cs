@@ -2,18 +2,21 @@ using UnityEngine;
 using System;
 using TMPro;
 
-public class TimeCycleUI : MonoBehaviour
+namespace Milhouzer.DayNightCycle
 {
-    [SerializeField]
-    private TextMeshProUGUI currentTime;
-
-    void Start()
+    public class TimeCycleUI : MonoBehaviour
     {
-        TimeCycle.OnTick += OnTimeChanged;
-    }
+        [SerializeField]
+        private TextMeshProUGUI currentTime;
 
-    void OnTimeChanged(DateTime time)
-    {
-        currentTime.text = time.Hour + ":" + time.Minute;
+        void Start()
+        {
+            TimeCycle.OnTick += OnTimeChanged;
+        }
+
+        void OnTimeChanged(DateTime time)
+        {
+            currentTime.text = time.Hour + ":" + time.Minute;
+        }
     }
 }

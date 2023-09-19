@@ -4,7 +4,6 @@ using System.Reflection;
 using CrashKonijn.Goap.Behaviours;
 using CrashKonijn.Goap.Interfaces;
 
-using Milhouzer.InventorySystem;
 using Milhouzer.Civilian.Tasks;
 
 namespace Milhouzer.Civilian

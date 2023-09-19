@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Milhouzer.Utility;
-using Milhouzer.Character;
 
-namespace Milhouzer.InventorySystem
+namespace Milhouzer.Character
 {
     public class Pickup : InteractableBase
     {
         public override void Interact(GameObject interactor)
         {
             base.Interact(interactor);
-            Milhouzer.Character.CharacterController controller = interactor.GetComponent<Milhouzer.Character.CharacterController>();
-            controller.ChangeState(new PickupState(controller));
+            ICharacter character = interactor.GetComponent<ICharacter>();
+            character.ChangeState(new PickupState(character));
         }
     }
 }

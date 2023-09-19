@@ -15,6 +15,6 @@ public class Building : MonoBehaviour
 
     protected virtual void Awake() 
     {
-        BuildingManager.RegisterBuilding(this);
+        // BuildingManager.RegisterBuilding(this);
     }
 }

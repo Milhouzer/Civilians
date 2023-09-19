@@ -6,9 +6,14 @@ namespace Milhouzer.Interfaces
 {
     public interface IInteractable
     {
+        float InteractionRange { get; }
+        bool CanInteract { get; }
         bool IsInteracting { get; }
 
-        void Interact() { }
+        Vector3 GetPosition();
+        void OnEnterInteractionRange() { }
+        void OnExitInteractionRange() { }
+        void Interact(GameObject interactor) { }
         void StopInteract() { }
     }
 }

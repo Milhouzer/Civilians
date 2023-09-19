@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CrashKonijn.Goap.Behaviours;
+using CrashKonijn.Goap.Interfaces;
 
 namespace Milhouzer.Civilian.Tasks
 {
@@ -29,7 +30,20 @@ namespace Milhouzer.Civilian.Tasks
         
         public delegate void AddTaskDelegate(TaskData data);
         public static event AddTaskDelegate OnTaskAdded;
-        
+
+        event ITaskPlanner.TaskCompleted ITaskPlanner.OnTaskCompleted
+        {
+            add
+            {
+                // throw new NotImplementedException();
+            }
+
+            remove
+            {
+                // throw new NotImplementedException();
+            }
+        }
+
         private void Awake() 
         {
             TimeCycle.OnTick += OnTimeChanged;    
@@ -47,21 +61,32 @@ namespace Milhouzer.Civilian.Tasks
 
         public void AddTask<TGoal>(TaskData data, TaskExecutionTrigger taskExecutionTIme) where TGoal : GoalBase
         {
-            Task<TGoal> task = new Task<TGoal>(data, taskExecutionTIme);
-            Debug.Log("New task : " + task.Data.target); 
+            var task = new Task<TGoal>(data, taskExecutionTIme);
             tasks.Add(task);
             
             OnTaskAdded?.Invoke(data);
         }
 
+        public void OnGoalCompleted(IGoalBase goal)
+        {
+            EndTask();
+        }
+
         public void StartTask(TaskBase task)
         {
-            currentTask = task; 
+            currentTask = task;
+            currentTask.Start();
         }
 
         public void EndTask()
         {
+            currentTask.Complete();
+            currentTask = null;
+        }
 
+        void ITaskPlanner.GoalStart(IGoalBase goal)
+        {
+            throw new NotImplementedException();
         }
     }
 }

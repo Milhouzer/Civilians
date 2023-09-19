@@ -21,21 +21,8 @@ namespace Milhouzer
         private void Awake () {
             cam = GetComponent<Camera>();
         }
-        void Update () {
-    
-            if(Input.GetMouseButton(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    IInteractable interactable = hit.transform.GetComponent<IInteractable>();
-                    if(interactable != null)
-                    {
-                        interactable.Interact();
-                    }
-                }
-            }
+        void Update () 
+        {    
             MousePanning();
             if(isPanning)
             {return;}

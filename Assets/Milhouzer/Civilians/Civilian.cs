@@ -4,22 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Milhouzer.Interfaces;
+using Milhouzer.Utility;
 
 namespace Milhouzer.Civilian
 {
-    public class Civilian : MonoBehaviour, IInteractable
+    public class Civilian : InteractableBase
     {
-        private bool isInteracting;
-        public bool IsInteracting { get => isInteracting; }
-
-        public void Interact()
-        {
-            isInteracting = true;
-        }
-
-        public void StopInteract()
-        {
-
-        }
+        
     }
 }

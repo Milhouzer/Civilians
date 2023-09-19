@@ -12,6 +12,7 @@ namespace Milhouzer.InventorySystem
     {
         public string Name;
         public Sprite Icon;
+        public GameObject Prefab;
         
         public ItemCategory Category;
         public bool IsCraftable;

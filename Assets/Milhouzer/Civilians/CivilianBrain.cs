@@ -22,7 +22,7 @@ namespace Milhouzer.Civilian
         {
             this.agent = this.GetComponent<AgentBehaviour>();
             this.goapRunner = FindObjectOfType<GoapRunnerBehaviour>();
-            taskPlanner = GetComponent<ITaskPlanner>();
+            this.taskPlanner = GetComponent<ITaskPlanner>();
             agent.GoapSet = this.goapRunner.GetGoapSet("Civilian");
         }
 
@@ -31,6 +31,8 @@ namespace Milhouzer.Civilian
             this.agent.Events.OnActionStop += this.OnActionStop;
             this.agent.Events.OnNoActionFound += this.OnNoActionFound;
             this.agent.Events.OnGoalCompleted += this.OnGoalCompleted;
+
+            this.taskPlanner.OnTaskCompleted += this.DetermineTask;
         }
 
         private void OnDisable()
@@ -38,6 +40,8 @@ namespace Milhouzer.Civilian
             this.agent.Events.OnActionStop -= this.OnActionStop;
             this.agent.Events.OnNoActionFound -= this.OnNoActionFound;
             this.agent.Events.OnGoalCompleted -= this.OnGoalCompleted;
+
+            this.taskPlanner.OnTaskCompleted -= this.DetermineTask;
         }
 
         private void Start()
@@ -52,8 +56,7 @@ namespace Milhouzer.Civilian
 
         private void OnGoalCompleted(IGoalBase goal)
         {
-            lookingForGoal = true;
-            Debug.Log(transform +  " has completed their goal");
+            taskPlanner.OnGoalCompleted(goal);
         }
 
         private void OnActionStop(IActionBase action)
@@ -61,20 +64,9 @@ namespace Milhouzer.Civilian
             // this.GetNextTask();
         }
 
-        private void Update() {
-            DetermineGoal();
-        }
-
-        private void DetermineGoal()
+        private void DetermineTask()
         {
-            if(lookingForGoal)
-            {
-                GetNextTask();
-            }else
-            {
-                
-                Debug.Log(transform +  " has goal");
-            }
+
         }
 
         private void GetNextTask()

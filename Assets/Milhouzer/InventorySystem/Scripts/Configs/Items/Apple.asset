@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Apple
   Icon: {fileID: 0}
-  IsCraftable: 1
+  Prefab: {fileID: 4930035352498893396, guid: fc8bcf90ee3f8b148b7cedceed49975d, type: 3}
+  Category: 0
+  IsCraftable: 0
   Ingredients: []
   CraftingDuration: 1
   IsSellable: 1

@@ -14,7 +14,6 @@ namespace Milhouzer.Civilian.Tasks
     public enum TaskRunState
     {
         Planned,
-        Started,
         Running,
         Aborted,
         Completed
@@ -22,7 +21,6 @@ namespace Milhouzer.Civilian.Tasks
 
     public struct TaskData
     {
-        Guid id;
         public DateTime executionTime;
         public DateTime endTime;
         public TimeSpan duration;
@@ -32,7 +30,6 @@ namespace Milhouzer.Civilian.Tasks
 
         public TaskData(DateTime executionTime, TimeSpan duration, string name, IGoalTarget target)
         {
-            this.id = Guid.NewGuid();
             this.executionTime = executionTime;
             this.duration = duration;
             this.endTime = this.executionTime.Add(duration);
@@ -60,12 +57,32 @@ namespace Milhouzer.Civilian.Tasks
 
         private TaskRunState state;
         public TaskRunState State { get => state; }
+        
+        private Guid guid;
+        
+        public Guid Guid { get => guid; }
 
         public TaskBase(TaskData data, TaskExecutionTrigger executionType)
         {
             taskData = data;
             this.executionType = executionType;
+            this.guid = Guid.NewGuid();
             this.state = TaskRunState.Planned;
+        }
+
+        public void Start()
+        {
+            this.state = TaskRunState.Running;
+        }
+
+        public void Complete()
+        {
+            this.state = TaskRunState.Completed;
+        }
+
+        public void Stop()
+        {
+            this.state = TaskRunState.Aborted;
         }
 
         public virtual Type GetGenericTypeDefinition()
@@ -74,7 +91,7 @@ namespace Milhouzer.Civilian.Tasks
         }
     }
 
-    public class Task<T> : TaskBase where T : GoalBase
+    public class Task<T> : TaskBase where T : IGoalBase
     {
         public Task(TaskData data, TaskExecutionTrigger executionType) : base(data, executionType)
         {
